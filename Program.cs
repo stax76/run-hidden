@@ -14,6 +14,8 @@ namespace run_hidden
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.FileName = args[0];
+                //p.StartInfo.RedirectStandardOutput = true;
+                //p.StartInfo.RedirectStandardError = true;
 
                 args = args.Skip(1).ToArray();
 
@@ -23,6 +25,8 @@ namespace run_hidden
 
                 p.StartInfo.Arguments = string.Join(" ", args);
                 p.Start();
+                //string ooo = p.StandardOutput.ReadToEnd();
+                //string eee = p.StandardError.ReadToEnd();
                 p.WaitForExit();
                 Environment.ExitCode = p.ExitCode;
             }
