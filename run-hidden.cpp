@@ -2,9 +2,9 @@
 #include <windows.h>
 
 #include <iostream>
-#include <regex>
 #include <sstream>
 #include <string>
+#include <vector>
 
 std::wstring join(const std::vector<std::wstring>& elements, const std::wstring& separator)
 {
