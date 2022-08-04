@@ -2,7 +2,7 @@
 About
 -----
 
-run-hidden runs console apps like powershell with hidden console window.
+run-hidden runs Windows console apps like powershell with hidden console window.
 
 Example command line
 --------------------
