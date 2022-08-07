@@ -11,7 +11,7 @@ Example command line
 run-hidden pwsh -command calc.exe
 ```
 
-My apps
--------
+Other apps
+----------
 
 https://stax76.github.io/frankskare
