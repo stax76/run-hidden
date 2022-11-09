@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+jobs:
+  release:
+    name: Release
+    strategy:
+      matrix:
+        kind: ["windows"]
+        include:
+          - kind: windows
+            os: windows-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app for release
+        run: msbuild run-hidden.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        
+      - name: Publish archive
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            Release\run-hidden.exe 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
