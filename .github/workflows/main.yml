@@ -12,10 +12,6 @@ jobs:
         include:
           - kind: windows
             os: windows-latest
-            target: win-x64
-            dotnet-version: '6.0.x'
-            runtime: win10-x64
-            targetFramework: net6.0-windows7.0
     runs-on: ${{ matrix.os }}
 
     steps:
