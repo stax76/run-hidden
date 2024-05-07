@@ -6,28 +6,23 @@ on:
 jobs:
   release:
     name: Release
-    strategy:
-      matrix:
-        kind: ["windows"]
-        include:
-          - kind: windows
-            os: windows-latest
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
 
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
+        uses: microsoft/setup-msbuild@v2
 
       - name: Build app for release
-        run: msbuild run-hidden.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release
-        
+        run: |
+          msbuild run-hidden.vcxproj -t:rebuild -verbosity:diag /p:Configuration=Release /p:Platform=x64
+          msbuild run-hidden.vcxproj -t:rebuild -verbosity:diag /p:Configuration=Release /p:Platform=Win32
+
       - name: Publish archive
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: |
-            Release\run-hidden.exe 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            Release\Win32\run-hidden.exe
+            Release\x64\run-hidden64.exe
