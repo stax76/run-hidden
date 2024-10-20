@@ -79,7 +79,12 @@ int APIENTRY wWinMain(
     // Wait until child process exits.
     WaitForSingleObject(pi.hProcess, INFINITE);
 
+    DWORD exit_code = 1;
+    GetExitCodeProcess(pi.hProcess, &exit_code);
+    
     // Close process and thread handles. 
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
+
+    return exit_code;
 }
