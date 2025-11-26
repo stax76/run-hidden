@@ -41,7 +41,8 @@ int APIENTRY wWinMain(
 
     for (int i = 1; i < count; i++)
     {
-        bool hasSpace = wcsstr(args[i], L" ") != NULL;
+        // space and unicode full width space
+        bool hasSpace = wcsstr(args[i], L" ") != NULL || wcsstr(args[i], L"\u3000") != NULL;
 
         if (hasSpace) {
             std::wstring s;
